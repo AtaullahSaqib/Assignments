@@ -39,7 +39,8 @@ const orders = [
     customer: "Jane",
     items: [
       { product: "Phone", price: 800, quantity: 1 },
-      { product: "Case", price: 20, quantity: 1 }
+      { product: "Case", price: 20, quantity: 1 },
+      { product: "Mouse", price: 25, quantity: 2 }
     ]
   }
 ];
@@ -67,8 +68,10 @@ const uniqueProducts = products(orders)
 console.log(uniqueProducts)
 
 // (C)
+console.log(orderTotals.map(x => x.total))
+const highestCustomer = orderTotals.reduce((max, item) => max.total < item.total ? max = item : max = max , orderTotals[0]) 
+console.log(highestCustomer, "Highest")
 
-// ?...
 
 // (D)
 
@@ -77,7 +80,7 @@ function getAll(arr) {
 }
 
 const allItems = getAll(orders)
-console.log(allItems)
+// console.log(allItems)
 
 //(E)
 
@@ -85,4 +88,11 @@ function sold(arr){
     return arr.map(order => order.items.reduce((sum, item) => sum + item.quantity, 0))
 }
 const itemSold = sold(orders)
-console.log(itemSold)
+// console.log(itemSold)
+
+
+
+let product =  { product: "Phone", price: 800, quantity: 1 }
+let entry = Object.entries(product)
+console.log(entry)
+console.log(Object.fromEntries(entry))

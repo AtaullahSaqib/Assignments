@@ -24,8 +24,15 @@ const employees = [
 
 // (A)
 
-// ?....
-
+let a = { }
+let dept = employees.forEach(groupby) 
+  function groupby(employee){
+    if(!a[employee.department]) {
+      a[employee.department] = [employee]
+    } else {a[employee.department].push(employee)}
+    
+  }
+console.log(a)
 // (B)
 
 function getEmployees(arr) {

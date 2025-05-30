@@ -54,3 +54,13 @@ function sortNames(arr) {
 
 const sortedNames = sortNames(separated.names)
 console.log(sortedNames)
+
+// (E)
+
+function validate(arr){
+  return {
+    email: arr.filter(item => item.includes("@") && item.includes("."))
+  }
+}
+const email = validate(validData)
+console.log(email)

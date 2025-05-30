@@ -20,6 +20,8 @@ const inventory = [
   { sku: "D004", name: "Widget D", stock: 10, reorderLevel: 20, category: "Parts" }
 ];
 
+inventory.sort((a,b) => (b.reorderLevel - b.stock) - (a.reorderLevel - a.stock))
+console.log(inventory,"inventory")
 // (A)
 
 function find(arr) {
@@ -27,7 +29,7 @@ function find(arr) {
 }
 
 const stock = find(inventory)
-console.log(stock)
+// console.log(stock)
 
 // (B)
 
@@ -36,3 +38,6 @@ function calculate(arr){
 }
 const calc = calculate(inventory)
 console.log(calc)
+
+// (C)
+
