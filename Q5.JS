@@ -59,4 +59,5 @@ console.log(cartSummary)
 
 // (E)
 
-// ?...
+const highestItem = cartItems.sort((a, b) => (b.price * b.quantity) - (a.price * a.quantity))[0]
+console.log(highestItem)

@@ -1,4 +1,4 @@
-// ### Question 11: Inventory Management
+// Question 11: Inventory Management
 
 // const inventory = [
 //   { sku: "A001", name: "Widget A", stock: 150, reorderLevel: 50, category: "Tools" },
@@ -33,11 +33,46 @@ const stock = find(inventory)
 
 // (B)
 
-function calculate(arr){
-    return arr.reduce((sum, x) => sum + x.stock * 10, 0)
-}
-const calc = calculate(inventory)
-console.log(calc)
+const sums = inventory.reduce((acc, item) => {
+  const cat = item.category;
+  acc[cat] = (acc[cat] || 0) + item.stock
+  return acc
+}, {})
+const stockValue = Object.keys(sums).map(cat => ({
+  [cat]: sums[cat] * 10
+})).reduce((obj, item) => ({ obj, item }), {})
+console.log(stockValue)
 
 // (C)
 
+function lowPerc(arr) {
+  return arr.reduce((lowest, item) => {
+    const percent = item.stock / item.reorderLevel
+    const lowestPercent = lowest.stock / lowest.reorderLevel
+    return percent < lowestPercent ? item : lowest
+  })
+}
+
+const lowestPercent = lowPerc(inventory)
+console.log(lowestPercent)
+
+// (D)
+
+const reorderItems = inventory.filter(item => item.stock <= item.reorderLevel)
+const categories = [...new Set(inventory.map(item => item.category))]
+const report = categories.map(category => ({ 
+  category,
+  totalItems: inventory.filter(item => item.category === category).length,
+  reorderCount: reorderItems.filter(item => item.category === category).length
+}));
+console.log("REPORT!", report)
+
+
+// (E)
+
+function sortByUrgency(arr) {
+  return [...arr].sort((a, b) => (a.stock - a.reorderLevel) - (b.stock - b.reorderLevel))
+}
+
+const urgentItems = sortByUrgency(inventory)
+console.log(urgentItems)

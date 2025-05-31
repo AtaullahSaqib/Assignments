@@ -1,4 +1,4 @@
-// ### Question 10: Social Media Analytics
+// Question 10: Social Media Analytics
 
 // const posts = [
 //   { id: 1, author: "user1", content: "Hello world!", likes: 15, tags: ["greeting", "first"] },
@@ -31,11 +31,34 @@ console.log(mostPopular)
 
 // (B)
 
-// ?...
+let list = []
+for (let i = 0; i < posts.length; i++) { 
+  let tags = posts[i].tags
+  for (let j = 0; j < tags.length; j++) {
+    let tag = tags[j]
+    if (!list.includes(tag)) { 
+      list.push(tag)
+    }
+  }
+}
+console.log(list)
 
 // (C)
 
-// ?...
+let box = {}
+for (let i = 0; i < posts.length; i++) { 
+  let author = posts[i].author
+  if (!box[author]) { 
+    box[author] = { likes: 0, count: 0 }
+  }
+  box[author].likes += posts[i].likes
+  box[author].count += 1
+}
+let result = {}
+for (let author in box) { 
+  result[author] = box[author].likes / box[author].count
+}
+console.log(result)
 
 // (D)
 

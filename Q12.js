@@ -1,4 +1,4 @@
-// ### Question 12: Time Series Data
+// Question 12: Time Series Data
 
 // const temperatures = [
 //   { date: "2024-01-01", temp: 22 },
@@ -28,3 +28,45 @@ const temperatures = [
 
 // (a)
 
+const find = temperatures.reduce((result, day) => { 
+  if (!result.hottest || day.temp > result.hottest.temp) { 
+    result.hottest = day;
+  }
+  if (!result.coldest || day.temp < result.coldest.temp) { 
+    result.coldest = day
+  }
+  return result
+}, {})
+console.log(find)
+
+// (B)
+
+const totalT = temperatures.map(day => day.temp).reduce((sum, temp) => sum + temp, 0)
+const avgTemp = totalT / temperatures.length
+console.log(avgTemp)
+
+// (C)
+
+const increasingDays = temperatures.filter((day, x) => { 
+  if (x === 0) return false
+  return day.temp > temperatures[x - 1].temp
+})
+console.log(increasingDays)
+
+// (D)
+
+const avg = temperatures.map(day => day.temp).reduce((sum, temp) => sum + temp, 0) / temperatures.length
+const anomalies = temperatures.filter(day => Math.abs(day.temp - avg) >= 4)
+console.log(anomalies)
+
+// (E)
+
+const temps = temperatures.map(day => day.temp)
+const total = temps.reduce((sum, temp) => sum + temp, 0)
+const summary = { 
+  min: Math.min(...temps),
+  max: Math.max(...temps),
+  average: total / temperatures.length,
+  totalDays: temperatures.length
+};
+console.log(summary)

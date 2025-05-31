@@ -44,7 +44,33 @@ console.log(busyEmployees)
 
 // (C)
 
-// ?...
+function avgSalary(arr) {
+  const box = arr.reduce((acc, person) => {
+    const dept = person.department;
+    acc[dept] = acc[dept] || { sum: 0, count: 0 }
+    acc[dept].sum += person.salary
+    acc[dept].count++;
+    return acc
+  }, {})
+  return Object.keys(box).map(dept => ({
+    [dept]: box[dept].sum / box[dept].count
+  })).reduce((obj, item) => ({ obj, item }), {})
+}
+console.log(avgSalary(employees))
+
 
 // (D)
 
+function uniqueProject(arr) {
+  return [new Set(arr.map(person => person.projects).flat())]
+}
+console.log(uniqueProject(employees))
+
+// (E)
+
+const depts = [...new Set(employees.map(person => person.department))]
+const topEarners = depts.map(dept => ({ 
+  [dept]: employees.filter(person => person.department === dept) 
+                   .reduce((top, person) => person.salary > top.salary ? person : top)
+})).reduce((obj, item) => ({ obj, item }), {})
+console.log(topEarners)
